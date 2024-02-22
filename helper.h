@@ -7,15 +7,29 @@
 #include <unistd.h>
 #include <arpa/inet.h>
 
+int PORT;
 int MAX_BUFFER;
 
 void handle_client(int client_socket) {
     char *buffer = malloc(MAX_BUFFER);
     read(client_socket, buffer, MAX_BUFFER - 1);
     printf("Richiesta del client: %s\n", buffer);
-    char response[] = "HTTP/1.1 200 OK\nContent-Type: text/plain\nContent-Length: 12\n\nHello world!";
-    write(client_socket, response, sizeof(response) - 1);
-    close(client_socket);
+
+    char method[8];
+    sscanf(buffer, "%s", method);
+
+    if (strcmp(method, "POST") == 0) {
+        handle_post(client_socket, buffer);
+    } else if (strcmp(method, "GET") == 0) {
+        handle_get(client_socket, buffer);
+    } else if (strcmp(method, "PATCH") == 0) {
+        handle_patch(client_socket, buffer);
+    } else if (strcmp(method, "DELETE") == 0) {
+        handle_delete(client_socket, buffer);
+    } else {
+        printf("Metodo HTTP non supportato: %s\n", method);
+    }
+
     free(buffer);
 }
 
