@@ -1,4 +1,5 @@
 #include "helper.h"
+#include "get.h"
 #include <time.h>
 
 void handle_get(int client_socket, char *query) {
