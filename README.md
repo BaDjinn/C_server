@@ -7,4 +7,8 @@ A back-end in C just to mess around
 
 
 Compile :
+
 `gcc server.c helper.c -o server`
+
+Next:
+Rebuild it with: libmicrohttpd
