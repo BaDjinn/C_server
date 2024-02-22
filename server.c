@@ -1,4 +1,8 @@
 #include "helper.h"
+#include "post.c"
+#include "get.c"
+#include "patch.c"
+#include "delete.c"
 
 int main() {
     get_env_vars();
