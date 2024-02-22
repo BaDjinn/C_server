@@ -1,4 +1,5 @@
 #include "helper.h"
+#include "delete.h"
 
 void handle_delete(int client_socket, char *payload) {
     printf("DELETE ricevuto: %s\n", payload);
